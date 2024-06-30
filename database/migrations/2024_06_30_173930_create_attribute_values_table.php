@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('attribute_values', function (Blueprint $table) {
             $table->id();
+            $table->string('value');
+            $table->unsignedBigInteger('attribute_id');
             $table->timestamps();
+
+            $table->foreign('attribute_id')->references('id')->on('attributes');
+                  ->onDelete('cascade');
         });
     }
 
