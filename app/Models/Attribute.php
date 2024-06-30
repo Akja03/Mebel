@@ -7,5 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Attribute extends Model
 {
+    protected $fillable = [
+        'name'
+    ];
 
+    public function attributeValues()
+    {
+        return $this->hasMany(AttributeValue::class);
+    }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_attributes')
+                    ->withPivot('value');
+    }
 }
